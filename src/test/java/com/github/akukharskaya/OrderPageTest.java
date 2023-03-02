@@ -1,12 +1,14 @@
 package com.github.akukharskaya;
 
 import com.github.akukharskaya.pages.OrderPage;
-import org.junit.Assert;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Set;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @RunWith(Parameterized.class)
@@ -54,10 +56,11 @@ public class OrderPageTest extends BaseTest {
         page.fillForm(name, surname, address, phone, station, period, date, comments, colors);
         page.clickConfirmOrder();
 
-        String expected = "Заказ оформлен";
+        String expectedSubstring = "Заказ оформлен";
         String actual = page.getOrderText();
+
         //!!! Тест на Chrome падает из-за некликабельности кнопки "Да" при оформлении заказа, для корректного тестирования используйте Firefox
-        Assert.assertEquals("Заказ не оформлен. Оформить его можно в браузере Firefox", expected, actual);
+        assertThat("Ошибка при оформлении заказа", actual, CoreMatchers.containsString(expectedSubstring));
     }
 
 

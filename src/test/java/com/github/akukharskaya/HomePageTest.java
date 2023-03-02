@@ -1,10 +1,12 @@
 package com.github.akukharskaya;
 
 import com.github.akukharskaya.pages.HomePage;
-import org.junit.Assert;
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
 public class HomePageTest extends BaseTest {
@@ -36,7 +38,7 @@ public class HomePageTest extends BaseTest {
         page.clickQuestion(num);
         String answer = page.getAnswer(num);
 
-        Assert.assertEquals(expected, answer);
+        assertThat(expected, CoreMatchers.equalTo(answer));
     }
 
 }
