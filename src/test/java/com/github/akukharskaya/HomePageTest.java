@@ -1,8 +1,10 @@
+package com.github.akukharskaya;
+
+import com.github.akukharskaya.pages.HomePage;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import pages.HomePage;
 
 @RunWith(Parameterized.class)
 public class HomePageTest extends BaseTest {

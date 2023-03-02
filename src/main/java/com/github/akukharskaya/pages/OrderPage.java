@@ -1,4 +1,4 @@
-package pages;
+package com.github.akukharskaya.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,24 +15,24 @@ public class OrderPage extends BasePage {
     //Кнопка заказа в хедере
     private final By orderButtonHeader = By.className("Button_Button__ra12g");
     //Кнопка заказа внизу страницы
-    private final By orderButtonDown = By.xpath("//*[@id=\"root\"]/div/div[1]/div[4]/div[2]/div[5]/button");
+    private final By orderButtonDown = By.className("Button_Middle__1CSJM");
     //Кнопка далее при оформлении заказа
-    private final By nextButton = By.xpath("//*[@id=\"root\"]/div/div[2]/div[3]/button");
+    private final By nextButton = By.xpath(".//button[text()='Далее']");
     //Поля для заполнения: имя, фамилия, адрес, номер телефона, даты, комментария
-    private final By inputName = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[1]/input");
-    private final By inputSurname = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[2]/input");
-    private final By inputAddress = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[3]/input");
-    private final By inputPhoneNumber = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[5]/input");
-    private final By inputDate = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[1]/div/div/input");
-    private final By inputComment = By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div[4]/input");
+    private final By inputName = By.xpath(".//input[@placeholder='* Имя']");
+    private final By inputSurname = By.xpath(".//input[@placeholder='* Фамилия']");
+    private final By inputAddress = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
+    private final By inputPhoneNumber = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
+    private final By inputDate = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    private final By inputComment = By.xpath(".//input[@placeholder='Комментарий для курьера']");
     //Выпадающий список станций метро
     private final By metroDropdown = By.className("select-search__input");
     //Выпадающий список срока аренды
     private final By rentalPeriod = By.xpath("//*[text()='* Срок аренды']");
     //Кнопка заказа
-    private final By orderButton = By.xpath("//*[@id=\"root\"]/div/div[2]/div[3]/button[2]");
+    private final By orderButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM'][text()='Заказать']");
     //Кнопка подтверждения заказа
-    private final By confirmOrder = By.xpath("/html/body/div/div/div[2]/div[5]/div[2]/button[2]");
+    private final By confirmOrder = By.xpath(".//button[text()='Да']");
     //Окно об успешном заказе
     private final By orderSuccess = By.className("Order_ModalHeader__3FDaJ");
 
@@ -123,6 +123,20 @@ public class OrderPage extends BasePage {
     //Метод возращает текст окна заказа (для сравнения ОР с ФР)
     public String getOrderText() {
         return driver.findElement(orderSuccess).getText();
+    }
+
+    public void fillForm(String name, String surname, String address, String phone, String station, String period, String date, String comments, Set<String> colors) {
+        setName(name);
+        setSurname(surname);
+        setAddress(address);
+        setPhone(phone);
+        selectMetroStation(station);
+        clickNext();
+        selectRentalPeriod(period);
+        setDate(date);
+        setComments(comments);
+        setColours(colors);
+        clickOrderButton();
     }
 
     //Скролл метро до нужной станции

@@ -1,4 +1,4 @@
-package pages;
+package com.github.akukharskaya.pages;
 
 import org.openqa.selenium.WebDriver;
 
